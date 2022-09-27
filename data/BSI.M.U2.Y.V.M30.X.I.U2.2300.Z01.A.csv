@@ -4,7 +4,16 @@ Data Source in SDW: null
 Collection:,End of period (E)
 Period\Unit:,[Percentage change ]
 ,,obs. status
-2021Nov,7.3,Provisional value (P)
+2022Aug,6.1,Provisional value (P)
+2022Jul,5.7,Normal value (A)
+2022Jun,5.7,Normal value (A)
+2022May,5.8,Normal value (A)
+2022Apr,6.1,Normal value (A)
+2022Mar,6.2,Normal value (A)
+2022Feb,6.4,Normal value (A)
+2022Jan,6.5,Normal value (A)
+2021Dec,6.9,Normal value (A)
+2021Nov,7.3,Normal value (A)
 2021Oct,7.7,Normal value (A)
 2021Sep,7.6,Normal value (A)
 2021Aug,8.0,Normal value (A)

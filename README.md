@@ -1,45 +1,22 @@
-⚠️ brouillon
+# Masse monétaire euro
 
-Scripts permettant de récupérer et d'afficher automatiquement les données de la masse monétaire euro.
+Scripts permettant de récupérer et d'afficher automatiquement les données de la masse monétaire euro depuis le site officiel https://sdw.ecb.europa.eu/.
 
 ## Données
 
-Monetary aggregate
+Affiche les données suivantes :
 
-- M1
-- M2
-- M3
+- `BSI.M.U2.Y.V.M10.X.1.U2.2300.Z01.E` agrégat monétaire M1
+- `BSI.M.U2.Y.V.M20.X.1.U2.2300.Z01.E` agrégat monétaire M2
+- `BSI.M.U2.Y.V.M30.X.1.U2.2300.Z01.E` agrégat monétaire M3
+- `BSI.M.U2.Y.V.M30.X.I.U2.2300.Z01.A` variation de M3 lissée
 
-vis-a-vis euro area non-MFI excl. central gov. reported by MFI & central gov. & post office giro Inst. in the euro area
+## Scripts
 
-- stock
-- transaction
-- index
+`scrap.jl` récupère l'index HTML et en extrait la liste de clés et leurs définitions (disponibles dans les fichiers `keys.txt` et `titles.txt`)
 
-Labels
+`download_csv.jl` télécharge les fichiers `.csv` pour les clés sélectionnées et les places dans le dossier `data/`
 
-```
-BSI.M.U2.Y.V.M10.X.1.U2.2300.Z01.E
-BSI.M.U2.Y.V.M10.X.4.U2.2300.Z01.E
-BSI.M.U2.Y.V.M10.X.I.U2.2300.Z01.A
-
-BSI.M.U2.Y.V.M20.X.1.U2.2300.Z01.E
-BSI.M.U2.Y.V.M20.X.4.U2.2300.Z01.E
-BSI.M.U2.Y.V.M20.X.I.U2.2300.Z01.A
-
-BSI.M.U2.Y.V.M30.X.1.U2.2300.Z01.E
-BSI.M.U2.Y.V.M30.X.4.U2.2300.Z01.E
-BSI.M.U2.Y.V.M30.X.I.U2.2300.Z01.A
-
-BSI.M.U2.Y.V.M30.X.I.U2.2300.Z01.V (moving average)
-```
-
-J'ai récupéré les clés et descriptions avec `scrap.jl` pour les mettre dans les fichiers `keys.txt` et `titles.txt`.
-
-J'ai téléchargé les fichiers `.csv` avec `download_csv.jl`.
-
-## Affichage
-
-J'ai généré la figure à partir des données `*.csv` avec le script `plot_monetary_mass.jl`.
+`plot_monetary_mass.jl` génère la figure suivante à partir des fichiers `.csv` précédents
 
 ![M1M2M3euro](./M1M2M3euro.png)

@@ -1,5 +1,13 @@
 using CSV, Plots, DataFrames, Dates, Colors
 
+TIME_INTERVAL = (Date(1997), Date(2023,01))
+TIME_TICKS = Date.(1997:2:2023)
+TIME_TICKS_STR = string.(Dates.year.(TIME_TICKS))
+
+EURO_TICKS = [5e6, 1e7, 1.5e7]
+EURO_TICKS_STR = ["5000 milliards d'€", "10 000 milliards d'€", "15 000 milliards d'€"]
+
+
 MONTH_CONV = Dict(
     "Jan" => 1,
     "Feb" => 2,
@@ -42,16 +50,20 @@ M2 = c2[:,2]
 M3 = c3[:,2]
 M3v = c4[:,2]
 
-plot(size=(1280,720), legend=:topleft, thickness_scaling=1.3, rightmargin = 1.5Plots.cm)
-xlims!((Date(1997), Date(2022,02)))
+plot(
+    size=(1280,720), legend=:topleft, thickness_scaling=1.3, rightmargin = 1.5Plots.cm,
+    xticks = (TIME_TICKS, TIME_TICKS_STR),
+    yticks = (EURO_TICKS, EURO_TICKS_STR)
+)
+xlims!(TIME_INTERVAL)
 ylims!((0, 1.6e7))
-xlabel!("date")
-ylabel!("€")
+# xlabel!("date")
+# ylabel!("€")
 plot!(d3, M3, fillrange=0, color=colorant"#FDD221", label="M3")
 plot!(d2, M2, fillrange=0, color=colorant"#FF4013", label="M2")
 plot!(d1, M1, fillrange=0, color=colorant"#010080", label="M1")
 
-plot!(twinx(), d4, M3v, color=colorant"#5B9024", linewidth=3, label="M3 variation", xticks=false, ylims=(-2, 14), ylabel="%")
-xlims!((Date(1997), Date(2022,02)))
+plot!(twinx(), d4, M3v, color=colorant"#5B9024", linewidth=3, label="M3 variation", xticks=false, ylims=(-2, 14), ylabel="% de croissance par an")
+xlims!(TIME_INTERVAL)
 
 savefig("M1M2M3euro.png")
