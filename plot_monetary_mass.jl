@@ -7,6 +7,8 @@ TIME_TICKS_STR = string.(Dates.year.(TIME_TICKS))
 EURO_TICKS = [5e6, 1e7, 1.5e7]
 EURO_TICKS_STR = ["5000 milliards d'€", "10 000 milliards d'€", "15 000 milliards d'€"]
 
+GROWTH_TICKS = -2:14
+GROWTH_TICKS_STR = string.(GROWTH_TICKS) .* " %"
 
 MONTH_CONV = Dict(
     "Jan" => 1,
@@ -51,9 +53,10 @@ M3 = c3[:,2]
 M3v = c4[:,2]
 
 plot(
-    size=(1280,720), legend=:topleft, thickness_scaling=1.3, rightmargin = 1.5Plots.cm,
+    size=(1400,720), legend=:topleft, thickness_scaling=1.3,
     xticks = (TIME_TICKS, TIME_TICKS_STR),
-    yticks = (EURO_TICKS, EURO_TICKS_STR)
+    yticks = (EURO_TICKS, EURO_TICKS_STR),
+    left_margin=-20Plots.px, right_margin=80Plots.px, 
 )
 xlims!(TIME_INTERVAL)
 ylims!((0, 1.6e7))
@@ -63,7 +66,11 @@ plot!(d3, M3, fillrange=0, color=colorant"#FDD221", label="M3")
 plot!(d2, M2, fillrange=0, color=colorant"#FF4013", label="M2")
 plot!(d1, M1, fillrange=0, color=colorant"#010080", label="M1")
 
-plot!(twinx(), d4, M3v, color=colorant"#5B9024", linewidth=3, label="M3 variation", xticks=false, ylims=(-2, 14), ylabel="% de croissance par an")
+plot!(twinx(), d4, M3v, color=colorant"#5B9024", linewidth=3, label="M3 variation",
+legend=:bottomright,
+xticks=false, ylims=(-2, 14), ylabel="croissance annuelle",
+yticks= (GROWTH_TICKS, GROWTH_TICKS_STR))
 xlims!(TIME_INTERVAL)
 
 savefig("M1M2M3euro.png")
+savefig("M1M2M3euro.svg")
