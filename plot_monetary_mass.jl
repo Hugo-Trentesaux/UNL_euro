@@ -1,6 +1,6 @@
 using CSV, Plots, DataFrames, Dates, Colors
 
-TIME_INTERVAL = (Date(1997), Date(2023,01))
+TIME_INTERVAL = (Date(1997), Date(2023,03))
 TIME_TICKS = Date.(1997:2:2023)
 TIME_TICKS_STR = string.(Dates.year.(TIME_TICKS))
 
