@@ -1,23 +1,10 @@
-using HTTP
+# website upgrade change monetary aggregate download url to something like
+# https://shiny.ecb.europa.eu/space-r-interactivereports/session/913cfeff4ff76624b037637cf144c986/download/download_data_1-dwnld_data?w=
+# which is a 10 MB csv with all the data
+# download it manually
 
-keys = [
-    "BSI.M.U2.Y.V.M10.X.1.U2.2300.Z01.E",
-    "BSI.M.U2.Y.V.M20.X.1.U2.2300.Z01.E",
-    "BSI.M.U2.Y.V.M30.X.1.U2.2300.Z01.E",
-    "BSI.M.U2.Y.V.M30.X.I.U2.2300.Z01.A",
-    "ILM.M.U2.C.LT00001.Z5.EUR",
-    "BKN.M.U2.NC10.B.ALLD.AS.S.E",
-    "BKN.M.U2.NC10.C.ALLD.AS.S.E",
-    ]
+# ILM.M.U2.C.LT00001.Z5.EUR
+# https://data.ecb.europa.eu/data/datasets/ILM/ILM.M.U2.C.LT00001.Z5.EUR
 
-url(key) = "https://sdw.ecb.europa.eu/quickviewexport.do?SERIES_KEY=$(key)&type=csv"
-
-mkpath("data")
-
-for key in keys
-    r = HTTP.get(url(key))
-    open(joinpath("data", "$(key).csv"), "w") do io
-        write(io, r.body)
-    end
-end
-
+# BKN.M.U2.NC10.B.ALLD.AS.S.E
+# https://data.ecb.europa.eu/data/datasets/BKN/BKN.M.U2.NC10.B.ALLD.AS.S.E
